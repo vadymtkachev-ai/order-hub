@@ -12,8 +12,8 @@ enum ShopStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Активен',
-            self::Paused => 'На паузе',
+            self::Active => 'Active',
+            self::Paused => 'Paused',
         };
     }
 }

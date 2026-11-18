@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <h1>Order Hub</h1>
     <table>
         <thead>
         <tr>

@@ -2,6 +2,12 @@
 
 @section('content')
     <h1>Order Hub</h1>
+    <p>
+        <a href="/shops">All</a><br>
+        @foreach(\App\Enums\ShopStatus::cases() as $case)
+            <a href="/shops?status={{$case->value}}">{{$case->label()}}</a><br>
+        @endforeach
+    </p>
     <table>
         <thead>
         <tr>
@@ -12,14 +18,18 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($shops as $shop)
+        @forelse($shops as $shop)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$shop->name}}</td>
                 <td><a href="{{$shop->url}}" target="_blank" rel="noopener noreferrer">{{$shop->url}}</a></td>
                 <td>{{$shop->status->label()}}</td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="4">No shops found</td>
+            </tr>
+        @endforelse
         </tbody>
     </table>
 @endsection

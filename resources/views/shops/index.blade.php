@@ -3,7 +3,7 @@
 @section('content')
     <h1>Order Hub</h1>
     <p>
-        <a href="{{route('shops.create')}}">Add shop</a>
+        <a href="{{route('shops.create')}}">Add shop</a><br>
     </p>
     <p>
         <a href="{{route('shops.index')}}">All</a><br>
@@ -27,10 +27,11 @@
                 <td>{{$shop->name}}</td>
                 <td><a href="{{$shop->url}}" target="_blank" rel="noopener noreferrer">{{$shop->url}}</a></td>
                 <td>{{$shop->status->label()}}</td>
+                <td><a href="{{route('shops.edit', $shop)}}">Edit</a></td>
             </tr>
         @empty
             <tr>
-                <td colspan="4">No shops found</td>
+                <td colspan="5">No shops found</td>
             </tr>
         @endforelse
         </tbody>

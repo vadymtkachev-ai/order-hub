@@ -9,4 +9,8 @@ Route::get('/', function () {
 
 Route::get('/shops', [ShopController::class, 'index'])->name('shops.index');
 Route::get('/shops/create', [ShopController::class, 'create'])->name('shops.create');
+Route::get('/shops/{shop}/edit', [ShopController::class, 'edit'])->name('shops.edit');
+
 Route::post('/shops', [ShopController::class, 'store'])->name('shops.store');
+
+Route::put('/shops/{shop}', [ShopController::class, 'update'])->name('shops.update');

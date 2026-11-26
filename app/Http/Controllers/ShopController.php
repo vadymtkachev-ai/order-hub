@@ -44,4 +44,21 @@ class ShopController extends Controller
         return redirect()->route('shops.index')->with('success', 'Shop created!');
     }
 
+    public function edit(Shop $shop): View
+    {
+        return view('shops.edit', compact('shop'));
+    }
+
+    public function update(Request $request, Shop $shop): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'url' => ['required', 'url', 'max:255', Rule::unique('shops', 'url')->ignore($shop)],
+            'status' => ['required', Rule::enum(ShopStatus::class)],
+        ]);
+
+        $shop->update($validated);
+
+        return redirect()->route('shops.index')->with('success', 'Shop updated!');
+    }
 }

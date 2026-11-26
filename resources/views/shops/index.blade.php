@@ -3,9 +3,12 @@
 @section('content')
     <h1>Order Hub</h1>
     <p>
-        <a href="/shops">All</a><br>
+        <a href="{{route('shops.create')}}">Add shop</a>
+    </p>
+    <p>
+        <a href="{{route('shops.index')}}">All</a><br>
         @foreach(\App\Enums\ShopStatus::cases() as $case)
-            <a href="/shops?status={{$case->value}}">{{$case->label()}}</a><br>
+            <a href="{{route('shops.index', ['status'=>$case->value])}}">{{$case->label()}}</a><br>
         @endforeach
     </p>
     <table>

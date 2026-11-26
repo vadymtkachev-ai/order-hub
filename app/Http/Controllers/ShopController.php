@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use App\Models\Shop;
 use App\Enums\ShopStatus;
@@ -22,4 +24,24 @@ class ShopController extends Controller
 
         return view('shops.index', ['shops' => $shops]);
     }
+
+    public function create(Request $request)
+    {
+        return view('shops.create');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'url' => ['required', 'url', 'max:255', Rule::unique('shops', 'url')],
+            'status' => ['required', Rule::enum(ShopStatus::class)],
+        ]);
+
+
+        Shop::create($validated);
+
+        return redirect()->route('shops.index')->with('success', 'Shop created!');
+    }
+
 }

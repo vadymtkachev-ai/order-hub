@@ -14,3 +14,5 @@ Route::get('/shops/{shop}/edit', [ShopController::class, 'edit'])->name('shops.e
 Route::post('/shops', [ShopController::class, 'store'])->name('shops.store');
 
 Route::put('/shops/{shop}', [ShopController::class, 'update'])->name('shops.update');
+
+Route::delete('/shops/{shop}', [ShopController::class, 'destroy'])->name('shops.destroy');
